@@ -11,6 +11,9 @@ export default class Login extends PureComponent {
             password: ''
          }
     }
+    static navigationOptions = {
+        header: null
+    };
 
     login() {
         firebaseApp
