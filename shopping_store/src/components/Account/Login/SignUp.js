@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export class SignIn extends Component {
+export class SignUp extends Component {
      constructor(props) {
         super(props);
         this.state = {
