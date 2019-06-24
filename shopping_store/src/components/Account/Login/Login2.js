@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Alert, View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { firebaseApp } from '../../../services/FirebaseConfig';
 
-export default class Login extends PureComponent {
+export default class Login2 extends PureComponent {
 
     constructor(props) {
         super(props);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { AccountService } from '../../../services/AccountService'
 
-export class SignUp extends Component {
+export default class SignUp extends Component {
      constructor(props) {
         super(props);
         this.state = {
@@ -14,13 +15,30 @@ export class SignUp extends Component {
         };
     }
 
-    onRegister() {
+    register() {
         const { name, email, phone, address, password, confirmPassword } = this.state;
         if(password !== confirmPassword) {
           return;
         }
-        console.log({
-          name, email, phone, address, password, confirmPassword
+        
+        AccountService.createAccount(email, password)
+            .then(() => {
+                Alert.alert(
+                    'Thông Báo',
+                    'Tạo tài khoản thành công!',
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')}
+                    ]
+                );
+            })
+            .catch(error => {
+                Alert.alert(
+                    'Thông Báo',
+                    'Tạo tài khoản thất bại. Xin thử lại sau!',
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')}
+                    ]
+            );
         })
     }
 
@@ -74,8 +92,8 @@ export class SignUp extends Component {
                       secureTextEntry
                       />
                 </View>
-                <TouchableOpacity style={bigButton} onPress={() => this.onRegister()}>
-                    <Text style={buttonText}>Register</Text>
+                <TouchableOpacity style={bigButton} onPress={() => this.register()}>
+                    <Text style={buttonText}>Tạo tài khoản</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -106,5 +124,3 @@ const styles = StyleSheet.create({
         fontWeight: '400',
     }
 });
-
-export default SignIn

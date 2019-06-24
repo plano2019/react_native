@@ -3,12 +3,14 @@ import {
   createAppContainer
 } from 'react-navigation';
 
-import Login from '../components/Account/Login/Login';
+import SignIn from '../components/Account/Login/SignIn';
+import SignUp from '../components/Account/Login/SignUp';
 
 const RootStack = createStackNavigator({
-  Login: Login,
+  SignIn: SignIn,
+  SignUp: SignUp,
 }, {
-  initialRouteName: 'Login',
+  initialRouteName: 'SignIn',
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
