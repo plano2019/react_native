@@ -5,12 +5,20 @@ import {
 
 import SignIn from '../components/Account/Login/SignIn';
 import SignUp from '../components/Account/Login/SignUp';
+import Home from '../components/Home/Home';
+import Main from '../components/Home/Main';
+import Menu from '../components/Home/Menu';
+import ProductPopular from '../components/Home/ProductPopular';
 
 const RootStack = createStackNavigator({
   SignIn: SignIn,
   SignUp: SignUp,
+  Home: Home,
+  Main: Main,
+  Menu: Menu,
+  ProductPopular: ProductPopular,
 }, {
-  initialRouteName: 'SignIn',
+  initialRouteName: 'Home',
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
