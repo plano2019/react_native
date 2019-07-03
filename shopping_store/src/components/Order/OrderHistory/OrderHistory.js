@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet , Text, View, Dimensions , ScrollView} from 'react-native';
 import mockData from '../mockData/mockHistoryOrder';
 
-export class OrderHistory extends Component {
+export default class OrderHistory extends Component {
   constructor(props) {
     super(props);
     this.state = { arrOrder: [] }
@@ -80,5 +80,3 @@ const styles = StyleSheet.create({
     fontSize: 16
   }
 });
-
-export default OrderHistory

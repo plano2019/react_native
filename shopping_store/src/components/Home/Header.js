@@ -11,7 +11,7 @@ export default class Header extends Component {
     render() {
         return (
             <View style={ styles.container }>
-                <TouchableOpacity onPress={this.props.onOpen}>
+                <TouchableOpacity onPress={this.props.openMenu}>
                     <Image style={ styles.navigationIcon } source={icMenu}/>
                 </TouchableOpacity>
                 <Text style={ styles.titleText }>Shopping</Text>

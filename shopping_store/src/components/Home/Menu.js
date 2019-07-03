@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-
+import { AccountService } from '../../services/AccountService';
 import profileIc from '../../assets/images/icons/profile.png';
 
 export default class Menu extends Component {
     render() {
         const { container, profile, btnStyle, btnText, btnSignInStyle } = styles;
+        const { navigate } = this.props.navigation;
         const logoutJSX = (
             <View style={{flex: 1}}>
                 <TouchableOpacity style={btnStyle}>
@@ -19,7 +20,7 @@ export default class Menu extends Component {
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <Text style={{color: '#fff', fontFamily: 'Avenir', fontSize: 20}}>Nguyen Van Anh</Text>
                     <View style={{marginTop: 50}}>
-                        <TouchableOpacity style={btnSignInStyle}>
+                        <TouchableOpacity style={btnSignInStyle} onPress={navigate('OrderHistory')}>
                             <Text style={btnText}>History Order</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={btnSignInStyle}>
@@ -28,7 +29,7 @@ export default class Menu extends Component {
                         <TouchableOpacity style={btnSignInStyle}>
                             <Text style={btnText}>Change Password</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={btnSignInStyle}>
+                        <TouchableOpacity style={btnSignInStyle} onPress={AccountService.logOut()}>
                             <Text style={btnText}>Logout</Text>
                         </TouchableOpacity>
                     </View>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
-        paddingHorizontal: 70
+        // paddingHorizontal: 70
     },
 
     btnText: {
@@ -70,12 +71,12 @@ const styles = StyleSheet.create({
     },
 
     btnSignInStyle: {
-        height: 20,
+        height: 30,
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
-        paddingHorizontal: 70,
+        paddingHorizontal: 30,
         marginBottom: 10
     },
 })

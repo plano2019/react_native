@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Drawer from "react-native-drawer";
 import Menu from "./Menu";
-import App from "../../../App";
+import Home from "./Home";
+import Category from './Category';
+import ProductPopular from './ProductPopular';
+import Header from './Header';
 
 export default class Main extends Component {
   closeControlPanel = () => {
@@ -16,11 +19,13 @@ export default class Main extends Component {
     return (
       <Drawer
         ref={ref => (this.drawer = ref)}
-        content={<Menu />}
+        content={<Menu navigation = {this.props.navigation}/>}
         tapToClose
         openDrawerOffset={0.5}
       >
-        <App open={this.openControlPanel.bind(this)} />
+        <Header openMenu={this.openControlPanel.bind(this)}/>
+        <Category />
+        <ProductPopular />
       </Drawer>
     );
   }
