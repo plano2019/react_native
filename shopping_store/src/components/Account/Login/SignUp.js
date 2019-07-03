@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { AccountService } from '../../../services/AccountService'
+import { AccountService } from '../../../services/AccountService';
+import { firebaseApp } from '../../../services/FirebaseConfig';
 
 export default class SignUp extends Component {
      constructor(props) {
@@ -17,29 +18,56 @@ export default class SignUp extends Component {
 
     register() {
         const { name, email, phone, address, password, confirmPassword } = this.state;
+        const { navigate } = this.props.navigation;
         if(password !== confirmPassword) {
           return;
         }
         
         AccountService.createAccount(email, password)
-            .then(() => {
-                Alert.alert(
-                    'Thông Báo',
-                    'Tạo tài khoản thành công!',
-                    [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')}
-                    ]
-                );
+            .then((user) => {
+                if (firebaseApp.auth().currentUser) {
+                    userId = firebaseApp.auth().currentUser.uid;
+                    if (userId) {
+                        firebaseApp.database().ref('users/' + userId).set({
+                          address:address,
+                          name:name,
+                          email:email,
+                          phone:phone,
+                          isAdmin: false
+                        })
+                        .then(() => {
+                            Alert.alert(
+                                'Thông Báo',
+                                'Tạo tài khoản thành công!',
+                                [
+                                    {text: 'OK', onPress: () => navigate('SignIn')}
+                                ]
+                            );
+                        })
+                        .catch(error => {
+                            Alert.alert(
+                                'Thông Báo',
+                                'Tạo tài khoản thất bại. Xin thử lại sau!',
+                                [
+                                    {text: 'OK', onPress: () => navigate('SignIn')}
+                                ]
+                        );
+                        })
+                    }
+                  }
+                
             })
             .catch(error => {
                 Alert.alert(
                     'Thông Báo',
                     'Tạo tài khoản thất bại. Xin thử lại sau!',
                     [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')}
+                        {text: 'OK', onPress: () => navigate('SignIn')}
                     ]
             );
-        })
+        });
+
+        
     }
 
 

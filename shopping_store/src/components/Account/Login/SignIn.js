@@ -12,24 +12,18 @@ export default class SignIn extends Component {
         };
     }
 
-    login() {
+    login(navigate) {
         const { username, password } = this.state;
         AccountService.authenticate(username, password)
         .then(() => {
-            Alert.alert(
-                'Thông Báo',
-                'Đăng nhập thành công!',
-                [
-                  {text: 'OK', onPress: () => console.log('OK Pressed')}
-                ]
-              );
+            navigate('Home')
         })
         .catch(error => {
             Alert.alert(
                 'Thông Báo',
                 'Đăng nhập thất bại!',
                 [
-                  {text: 'OK', onPress: () => console.log('OK Pressed')}
+                  {text: 'OK', onPress: () => navigate('Home')}
                 ]
               );
         })
@@ -61,7 +55,7 @@ export default class SignIn extends Component {
                       />
                 </View>
                 <TouchableOpacity style={bigButton} 
-                    onPress = {() => {this.login()}}>
+                    onPress = {() => {this.login(navigate)}}>
                     <Text style={buttonText}>Đăng Nhập</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={textLink} 

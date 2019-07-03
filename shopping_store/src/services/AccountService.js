@@ -12,5 +12,5 @@ export const AccountService =  {
         return firebaseApp
             .auth()
             .createUserWithEmailAndPassword(username, password)
-        }
+    }
 }

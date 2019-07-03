@@ -18,7 +18,7 @@ const RootStack = createStackNavigator({
   Menu: Menu,
   ProductPopular: ProductPopular,
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'SignIn',
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
