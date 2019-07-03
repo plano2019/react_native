@@ -8,17 +8,13 @@ import SignUp from '../components/Account/Login/SignUp';
 import Home from '../components/Home/Home';
 import Main from '../components/Home/Main';
 import Menu from '../components/Home/Menu';
-// import OrderHistory from '../components/Order/OrderHistory/OrderHistory';
-import ProductPopular from '../components/Home/ProductPopular';
 
 const RootStack = createStackNavigator({
-  SignIn: SignIn,
-  SignUp: SignUp,
-  Home: Home,
-  Main: Main,
-  Menu: Menu,
-  ProductPopular: ProductPopular,
-  // OrderHistory: OrderHistory,
+  SignIn,
+  SignUp,
+  Home,
+  Main,
+  Menu
 }, {
   initialRouteName: 'Main',
   headerLayoutPreset: 'center',

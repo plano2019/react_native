@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Drawer from "react-native-drawer";
 import Menu from "./Menu";
-import Home from "./Home";
 import Category from './Category';
 import ProductPopular from './ProductPopular';
 import Header from './Header';

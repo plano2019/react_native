@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet , Text, View, Dimensions , ScrollView} from 'react-native';
-import mockData from '../mockData/mockHistoryOrder';
+import {arrOrder} from './../OrderHistory/OrderHistoryMock';
+
 
 export default class OrderHistory extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ export default class OrderHistory extends Component {
   }
 
   componentDidMount() {
-    this.setState({arrOrder: mockData.mockArrOrder})
+    this.setState({arrOrder: arrOrder})
   }
 
   static navigationOptions = {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native';
-import mockData from '../mockData/mockHistoryOrder';
+import { Icon } from 'react-native-elements';
+import {items} from './CartMock';
 
 export class Cart extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export class Cart extends Component {
   }
 
   componentDidMount() {
-    this.setState({dataSource: mockData.items});
+    this.setState({dataSource: items});
   }
 
   render() {
@@ -27,7 +28,7 @@ export class Cart extends Component {
       infoWrapper,
       info,
       controller,
-      deleteController,
+      infoText,
       quantityController,
       controllerText
     } = styles;
@@ -40,27 +41,29 @@ export class Cart extends Component {
             renderItem = {({item}) => (
               <View style={card}>
                   <View style={imageWrapper}>
-                    <Image source={{uri: item.img}} style={productImage}/>
+                    <Image source={item.img} style={productImage}/>
                   </View>
                   <View style={infoWrapper}>
                     <View style={info}>
-                      <Text>{item.name}</Text>
-                      <Text>{item.price} / {item.unit}</Text>
+                      <Text style={infoText}>{item.name}</Text>
+                      <Text style={infoText}>{item.price} / {item.unit}</Text>
                     </View>
                     <View style={controller}>
-                      <View style={deleteController}>
+                      <View>
                         <TouchableOpacity>
-                          <Text style={controllerText}>[ X ]</Text>
+                          <Icon name='trash' type='feather' color='#065B7D'/>
                         </TouchableOpacity>
                       </View>
                       <View style={quantityController}>
                         <TouchableOpacity>
-                          <Text style={controllerText}>[ - ]</Text>
+                          <View>
+                            <Icon name='plus-circle' type='feather' color='#065B7D'/>
+                          </View>
                         </TouchableOpacity>
                         {/* // TODO: handle amount of item */}
                         <Text style={controllerText}>1</Text> 
                         <TouchableOpacity>
-                          <Text style={controllerText}>[ + ]</Text>
+                          <Icon name='minus-circle' type='feather' color='#065B7D'/>
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -115,6 +118,9 @@ const styles = StyleSheet.create({
   info: {
     flex: 2
   },
+  infoText: {
+    fontWeight: 'bold'
+  },
   controller: {
     flex: 1,
     flexDirection: 'row',
@@ -126,11 +132,10 @@ const styles = StyleSheet.create({
   },
   quantityController: {
     flexDirection: 'row',
-    width: '40%',
+    width: '30%',
     justifyContent: "space-between",
     paddingRight: 5
-  },
-  deleteController: {width: '20%'}
+  }
 });
 
 export default Cart
