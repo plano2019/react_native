@@ -4,9 +4,12 @@ import { AccountService } from '../../services/AccountService';
 import profileIc from '../../assets/images/icons/profile.png';
 
 export default class Menu extends Component {
+    gotoOrderHistory() {
+        const { navigate } = this.props.navigation;
+        navigate('OrderHistory');
+    }
     render() {
         const { container, profile, btnStyle, btnText, btnSignInStyle } = styles;
-        const { navigate } = this.props.navigation;
         const logoutJSX = (
             <View style={{flex: 1}}>
                 <TouchableOpacity style={btnStyle}>
@@ -20,7 +23,7 @@ export default class Menu extends Component {
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <Text style={{color: '#fff', fontFamily: 'Avenir', fontSize: 20}}>Nguyen Van Anh</Text>
                     <View style={{marginTop: 50}}>
-                        <TouchableOpacity style={btnSignInStyle} onPress={navigate('OrderHistory')}>
+                        <TouchableOpacity style={btnSignInStyle} onPress={() => this.gotoOrderHistory()}>
                             <Text style={btnText}>History Order</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={btnSignInStyle}>
