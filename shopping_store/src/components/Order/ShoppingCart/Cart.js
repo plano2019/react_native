@@ -30,12 +30,16 @@ export class Cart extends Component {
       controller,
       infoText,
       quantityController,
-      controllerText
+      controllerText,
+      productView,
+      checkoutView,
+      checkoutBtn,
+      checkoutInfo
     } = styles;
 
     return (
       <View style={container}>
-        <View style={{flex: 9}}>
+        <View style={productView}>
           <FlatList
             data = {this.state.dataSource}
             renderItem = {({item}) => (
@@ -61,7 +65,7 @@ export class Cart extends Component {
                           </View>
                         </TouchableOpacity>
                         {/* // TODO: handle amount of item */}
-                        <Text style={controllerText}>1</Text> 
+                        <Text style={controllerText}>{item.quantity}</Text> 
                         <TouchableOpacity>
                           <Icon name='minus-circle' type='feather' color='#065B7D'/>
                         </TouchableOpacity>
@@ -74,13 +78,13 @@ export class Cart extends Component {
           />
           
         </View>
-        <View style={{flexDirection: 'column', flex: 1.5, backgroundColor: '#fff', margin: 5, padding: 10}}>
-          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+        <View style={checkoutView}>
+          <View style={checkoutInfo}>
             <Text style={{fontSize: 18, color: '#065B7D'}}>Tổng tiền ước tính: </Text>
             <Text style={{fontSize: 18, color: '#065B7D'}}>180,000 VNĐ</Text>
           </View>
           <View style={{flex: 1}}>
-            <TouchableOpacity style={{flex: 1, backgroundColor: '#065B7D', justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity style={checkoutBtn}>
               <Text style={{fontSize: 20, color: '#fff'}}>Đặt hàng</Text>
             </TouchableOpacity>
           </View>
@@ -135,6 +139,26 @@ const styles = StyleSheet.create({
     width: '30%',
     justifyContent: "space-between",
     paddingRight: 5
+  },
+  productView: {flex: 9},
+  checkoutView: {
+    flexDirection: 'column',
+    flex: 1.5,
+    backgroundColor: '#fff',
+    margin: 5,
+    padding: 10
+  },
+  checkoutInfo: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  checkoutBtn: {
+    flex: 1,
+    backgroundColor: '#065B7D',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

@@ -8,15 +8,18 @@ import SignUp from '../components/Account/Login/SignUp';
 import Home from '../components/Home/Home';
 import Main from '../components/Home/Main';
 import Menu from '../components/Home/Menu';
-
+import OrderConfirm from '../components/Order/OrderConfirm/OrderConfirm';
+import Cart from '../components/Order/ShoppingCart/Cart';
 const RootStack = createStackNavigator({
   SignIn,
   SignUp,
   Home,
   Main,
-  Menu
+  Menu,
+  OrderConfirm,
+  Cart
 }, {
-  initialRouteName: 'Main',
+  initialRouteName: 'Cart',
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
