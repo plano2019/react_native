@@ -1,25 +1,55 @@
 import React, {Component} from 'react';
 import { Text, View, Image, StyleSheet, Dimensions } from 'react-native';
-
-import bo from '../../assets/images/categories/bo.png'
-import cam from '../../assets/images/categories/cam.jpg'
-import mangcut from '../../assets/images/categories/mangcut.jpg'
-import oi from '../../assets/images/categories/oi.png'
+import { firebaseApp } from '../../services/FirebaseConfig';
 
 export default class ProductPopular extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            products : []
+        }
+    }
+
+    componentDidMount() {
+        firebaseApp.database().ref('products').limitToFirst(20).on('value', (snapshot) => {
+            let data = snapshot.val();
+            let items = Object.values(data);
+            this.setState({
+                products: items
+            });
+        });
+    }
+
     render() {
         const { 
             container, titleContainer, title,
             body, productContainer, productImage,
             productName, productPrice
         } = styles;
+
+        const {products} = this.state;
+
+
         return (
             <View style={container}>
                 <View style={titleContainer}>
                     <Text style={title}>Product Popular</Text>
                 </View>
                 <View style={body}>
-                    <View style={productContainer}>
+                    {
+                        products.map((product) => {
+                               return (
+                                <View>
+                                    <Image source={{uri: product.imageUrl}} style={productImage} />
+                                    <Text style={productName}>{product.title}</Text>
+                                    <Text style={productPrice}>{product.price} VND/KG</Text>
+                                </View>
+                               )
+                               
+                           })
+                    }
+                    {/* <View style={productContainer}>
                         <Image source={bo} style={productImage} />
                         <Text style={productName}>Bo Sap</Text>
                         <Text style={productPrice}>60.000 VND/KG</Text>
@@ -38,7 +68,7 @@ export default class ProductPopular extends Component {
                         <Image source={oi} style={productImage} />
                         <Text style={productName}>Oi Nu Hoang</Text>
                         <Text style={productPrice}>50.000 VND/KG</Text>
-                    </View>
+                    </View> */}
                 </View>
             </View>
         );

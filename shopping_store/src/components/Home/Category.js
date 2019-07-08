@@ -18,12 +18,18 @@ export default class Category extends Component {
     }
 
     componentDidMount() {
-        firebaseApp.database().ref('categories').once('value', (snapshot) => {
+        firebaseApp.database().ref('categories').on('value', (snapshot) => {
             let data = snapshot.val();
             let items = Object.values(data);
             this.setState({
                 categories: items
             });
+        });
+    }
+
+    onIndexChanged(index){
+        this.setState({
+            selectedIndex: index
         });
     }
 
@@ -41,9 +47,10 @@ export default class Category extends Component {
                         showsPagination={true} 
                         loop={true}
                         index={this.state.selectedIndex} 
-                        onMomentumScrollEnd={(event, state, context) => {
+                        // onMomentumScrollEnd={this.onIndexChanged.bind(this)}
+                        onIndexChanged={(index) => {
                             this.setState({
-                              selectedIndex: state.index,
+                              selectedIndex: index,
                             });
                           }}
                     >
