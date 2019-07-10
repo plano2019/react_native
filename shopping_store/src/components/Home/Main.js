@@ -32,7 +32,7 @@ export default class Main extends Component {
         
         <ScrollView >
         <Header openMenu={this.openControlPanel.bind(this)}/>
-            <Category />
+            <Category navigation = {this.props.navigation}/>
             <ProductPopular />
         </ScrollView>
       </Drawer>

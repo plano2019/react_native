@@ -8,6 +8,7 @@ import SignUp from '../components/Account/Login/SignUp';
 import Home from '../components/Home/Home';
 import Main from '../components/Home/Main';
 import Menu from '../components/Home/Menu';
+import ProductList from '../components/Home/ListProduct';
 import OrderConfirm from '../components/Order/OrderConfirm/OrderConfirm';
 import Cart from '../components/Order/ShoppingCart/Cart';
 import OrderHistory from '../components/Order/OrderHistory/OrderHistory';
@@ -19,7 +20,8 @@ const RootStack = createStackNavigator({
   Menu,
   OrderConfirm,
   OrderHistory,
-  Cart
+  Cart,
+  ProductList
 }, {
   initialRouteName: 'Main',
   headerLayoutPreset: 'center',

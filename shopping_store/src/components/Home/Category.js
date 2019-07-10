@@ -3,6 +3,7 @@ import { Text, View, Image, StyleSheet, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 import { firebaseApp } from '../../services/FirebaseConfig';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
@@ -34,6 +35,7 @@ export default class Category extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         const { wrapper, textStyle, imageStyle, categoryTitle } = styles;
         const {categories} = this.state;
         return (
@@ -47,7 +49,6 @@ export default class Category extends Component {
                         showsPagination={true} 
                         loop={true}
                         index={this.state.selectedIndex} 
-                        // onMomentumScrollEnd={this.onIndexChanged.bind(this)}
                         onIndexChanged={(index) => {
                             this.setState({
                               selectedIndex: index,
@@ -57,13 +58,13 @@ export default class Category extends Component {
                         {
                            categories.map((category) => {
                                return (
-                                <View>
+                                <TouchableOpacity onPress={() => navigate('ProductList', {categoryName : category.name})}>
                                     <Image 
                                         source={{uri: category.imageUrl}} 
                                         style={imageStyle} 
                                     />
                                     <Text style={categoryTitle}>{category.name}</Text>
-                                </View>
+                                </TouchableOpacity>
                                )
                                
                            })
