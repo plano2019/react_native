@@ -41,7 +41,6 @@ export default class ListProduct extends Component {
         const { products } = this.state;
         return (
             <View style={{flex: 1}}>
-                <Header />
                 <View style={container}>
                     <ScrollView style={wrapper}>
                         <View style={header}>
@@ -51,9 +50,9 @@ export default class ListProduct extends Component {
                             <Text style={titleStyle}>{this.props.navigation.getParam('categoryName')}</Text>
                             <View style={{width: 30}}></View>
                         </View>
-                        { products.map((product) => {
+                        { products.map((product, idx) => {
                             return (
-                                <View style={productContainer}>
+                                <View style={productContainer} key={idx}>
                                     <Image source={{uri: product.imageUrl}} style={productImage} />
                                     <View style={productInfo}>
                                         <View style={{height: 30}}></View>

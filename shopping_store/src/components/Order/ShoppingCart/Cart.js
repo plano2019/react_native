@@ -84,7 +84,7 @@ export class Cart extends Component {
             <Text style={{fontSize: 18, color: '#065B7D'}}>180,000 VNĐ</Text>
           </View>
           <View style={{flex: 1}}>
-            <TouchableOpacity style={checkoutBtn}>
+            <TouchableOpacity style={checkoutBtn} onPress={() => this.props.navigation.navigate('OrderConfirm')}>
               <Text style={{fontSize: 20, color: '#fff'}}>Đặt hàng</Text>
             </TouchableOpacity>
           </View>

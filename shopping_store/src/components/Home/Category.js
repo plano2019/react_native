@@ -4,11 +4,12 @@ import Swiper from 'react-native-swiper';
 
 import { firebaseApp } from '../../services/FirebaseConfig';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { withNavigation } from 'react-navigation';
 
 const { width, height } = Dimensions.get('window');
 
 
-export default class Category extends Component {
+class Category extends Component {
 
     constructor(props) {
         super(props);
@@ -28,11 +29,6 @@ export default class Category extends Component {
         });
     }
 
-    onIndexChanged(index){
-        this.setState({
-            selectedIndex: index
-        });
-    }
 
     render() {
         const { navigate } = this.props.navigation;
@@ -44,7 +40,8 @@ export default class Category extends Component {
                     <Text style={textStyle}>Category</Text>
                 </View>
                 <View style={{flex: 4}}>
-                    <Swiper 
+                    <Swiper
+                        key={categories.length} 
                         showsButtons={false} 
                         showsPagination={true} 
                         loop={true}
@@ -56,9 +53,9 @@ export default class Category extends Component {
                           }}
                     >
                         {
-                           categories.map((category) => {
+                           categories.map((category, idx) => {
                                return (
-                                <TouchableOpacity onPress={() => navigate('ProductList', {categoryName : category.name})}>
+                                <TouchableOpacity key={idx} onPress={() => navigate('ProductList', {categoryName : category.name})}>
                                     <Image 
                                         source={{uri: category.imageUrl}} 
                                         style={imageStyle} 
@@ -66,7 +63,6 @@ export default class Category extends Component {
                                     <Text style={categoryTitle}>{category.name}</Text>
                                 </TouchableOpacity>
                                )
-                               
                            })
                         }
                     </Swiper>
@@ -75,6 +71,8 @@ export default class Category extends Component {
         );
     }
 }
+
+export default withNavigation(Category);
 
 const imageWidth = width - 130;
 const imageHeight = (imageWidth / 933) * 465;

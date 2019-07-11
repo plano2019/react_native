@@ -6,19 +6,21 @@ import icSearch from '../../assets/images/icons/search-icon.png';
 import icCart from '../../assets/images/icons/cart-icon.png';
 
 const { height } = Dimensions.get('window');
-
-export default class Header extends Component {
+export class Header extends Component {
+    openDrawer() {
+        this.props.navigationProps.toggleDrawer();
+    }
     render() {
         return (
             <View style={ styles.container }>
-                <TouchableOpacity onPress={this.props.openMenu}>
+                <TouchableOpacity onPress={() => this.openDrawer()}>
                     <Image style={ styles.navigationIcon } source={icMenu}/>
                 </TouchableOpacity>
                 <Text style={ styles.titleText }>Shopping</Text>
                 <TouchableOpacity>
                     <Image style={ styles.iconImage } source={icSearch}/>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigationProps.navigate('Cart')}>
                     <Image style={ styles.iconImage } source={icCart}/>
                 </TouchableOpacity>
             </View>
@@ -28,8 +30,6 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
     container: {
-          flex: 1,
-          height: height / 12, 
           backgroundColor: '#255A72',
           flexDirection: 'row', 
           justifyContent: 'space-between',

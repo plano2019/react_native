@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { AccountService } from '../../services/AccountService';
 import profileIc from '../../assets/images/icons/profile.png';
+import {NavigationActions} from 'react-navigation';
 
 export default class Menu extends Component {
-    gotoOrderHistory() {
-        const { navigate } = this.props.navigation;
-        navigate('OrderHistory');
-    }
+    navigateToScreen = ( route ) =>(
+        () => {
+        const navigateAction = NavigationActions.navigate({
+            routeName: route
+        });
+        this.props.navigation.dispatch(navigateAction);
+    })
     render() {
         const { container, profile, btnStyle, btnText, btnSignInStyle } = styles;
         const logoutJSX = (
@@ -23,13 +27,13 @@ export default class Menu extends Component {
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <Text style={{color: '#fff', fontFamily: 'Avenir', fontSize: 20}}>Nguyen Van Anh</Text>
                     <View style={{marginTop: 50}}>
-                        <TouchableOpacity style={btnSignInStyle} onPress={() => this.gotoOrderHistory()}>
+                        <TouchableOpacity style={btnSignInStyle} onPress={this.navigateToScreen('OrderHistory')}>
                             <Text style={btnText}>History Order</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={btnSignInStyle}>
+                        <TouchableOpacity style={btnSignInStyle} onPress={this.navigateToScreen('UpdateInfo')}>
                             <Text style={btnText}>Update Info</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={btnSignInStyle}>
+                        <TouchableOpacity style={btnSignInStyle} onPress={this.navigateToScreen('ChangePassword')}>
                             <Text style={btnText}>Change Password</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={btnSignInStyle} onPress={AccountService.logOut()}>

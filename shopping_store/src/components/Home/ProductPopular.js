@@ -38,9 +38,9 @@ export default class ProductPopular extends Component {
                 </View>
                 <View style={body}>
                     {
-                        products.map((product) => {
+                        products.map((product, idx) => {
                                return (
-                                <View>
+                                <View key={idx}>
                                     <Image source={{uri: product.imageUrl}} style={productImage} />
                                     <Text style={productName}>{product.title}</Text>
                                     <Text style={productPrice}>{product.price} VND/KG</Text>
