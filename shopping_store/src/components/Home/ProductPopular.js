@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { Text, View, Image, StyleSheet, Dimensions } from 'react-native';
 import { firebaseApp } from '../../services/FirebaseConfig';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { withNavigation } from 'react-navigation';
 
-export default class ProductPopular extends Component {
+class ProductPopular extends Component {
 
     constructor(props) {
         super(props);
@@ -29,7 +31,7 @@ export default class ProductPopular extends Component {
         } = styles;
 
         const {products} = this.state;
-
+        const { navigate } = this.props.navigation;
 
         return (
             <View style={container}>
@@ -40,11 +42,11 @@ export default class ProductPopular extends Component {
                     {
                         products.map((product, idx) => {
                                return (
-                                <View key={idx}>
+                                <TouchableOpacity key={idx} onPress={() => navigate('ProductDetail', {productTitle : product.title})}>
                                     <Image source={{uri: product.imageUrl}} style={productImage} />
                                     <Text style={productName}>{product.title}</Text>
                                     <Text style={productPrice}>{product.price} VND/KG</Text>
-                                </View>
+                                </TouchableOpacity>
                                )
                                
                            })
@@ -74,6 +76,8 @@ export default class ProductPopular extends Component {
         );
     }
 }
+
+export default withNavigation(ProductPopular);
 
 const { width } = Dimensions.get('window');
 const productImageWidth = (width - 150) / 2;

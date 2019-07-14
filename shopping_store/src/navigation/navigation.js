@@ -16,10 +16,12 @@ import OrderHistory from '../components/Order/OrderHistory/OrderHistory';
 import UpdateInfo from '../components/Account/ChangeUserInformation/UpdateInfo';
 import ChangePassword from '../components/Account/ChangePassword/ChangePassword';
 import OrderConfirm from '../components/Order/OrderConfirm/OrderConfirm';
+import ProductDetail from '../components/Home/ProductDetail';
 
 const MainStack = createStackNavigator({
   ProductHome: Main,
   ProductList: ListProduct,
+  ProductDetail: ProductDetail,
   OrderHistory,
   UpdateInfo,
   ChangePassword,
@@ -47,7 +49,7 @@ const BottomTab = createBottomTabNavigator({
 })
 
 const RootStack = createStackNavigator({
-  MainTab: BottomTab
+  MainTab: BottomTab,
 }, {
   defaultNavigationOptions: {
     header: null
