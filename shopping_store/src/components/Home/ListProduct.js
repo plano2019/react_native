@@ -5,6 +5,7 @@ import Header from '../Home/Header';
 import back from '../../assets/images/categories/arrowleft.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { firebaseApp } from '../../services/FirebaseConfig';
+import { withNavigation } from 'react-navigation';
 
 export default class ListProduct extends Component {
 
@@ -19,6 +20,7 @@ export default class ListProduct extends Component {
     static navigationOptions = {
         header: null
     }
+    
 
     componentDidMount() {
         categoryName = this.props.navigation.getParam('categoryName');
@@ -39,6 +41,7 @@ export default class ListProduct extends Component {
     render() {
         const { container, header, wrapper, backStyle, titleStyle, productContainer, productInfo, productImage, txtName, txtPrice } = styles;
         const { products } = this.state;
+        const { navigate } = this.props.navigation
         return (
             <View style={{flex: 1}}>
                 <View style={container}>
@@ -53,13 +56,15 @@ export default class ListProduct extends Component {
                         { products.map((product, idx) => {
                             return (
                                 <View style={productContainer} key={idx}>
-                                    <Image source={{uri: product.imageUrl}} style={productImage} />
-                                    <View style={productInfo}>
-                                        <View style={{height: 30}}></View>
-                                        <Text style={txtName}>{product.title}</Text>
-                                        <Text style={txtPrice}>{product.price} VND / KG</Text>
-                                        <View style={{height: 30}}></View>
-                                    </View>
+                                    <TouchableOpacity key={idx} onPress={() => navigate('ProductDetail', {productTitle : product.title})}>
+                                        <Image source={{uri: product.imageUrl}} style={productImage} />
+                                        <View style={productInfo}>
+                                            <View style={{height: 30}}></View>
+                                            <Text style={txtName}>{product.title}</Text>
+                                            <Text style={txtPrice}>{product.price} VND / KG</Text>
+                                            <View style={{height: 30}}></View>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
                             )
                             
@@ -73,13 +78,13 @@ export default class ListProduct extends Component {
 }
 
 const { width } = Dimensions.get('window');
-const productImageWidth = (width - 30) / 2;
+const productImageWidth = (width) / 1.4;
 const productImageHeight = productImageWidth / 280 * 190;
 
 const styles = StyleSheet.create({
     container: {
         flex: 9,
-        backgroundColor: '#DBDBD8',
+        backgroundColor: '#DBDBD8'
     },
 
     header: {
@@ -112,6 +117,7 @@ const styles = StyleSheet.create({
     productContainer: {
         flexDirection: 'row',
         paddingVertical: 20,
+        justifyContent: 'center',
         borderTopColor: '#fff',
         borderBottomColor: '#D2D2D2',
         borderRightColor: '#fff',

@@ -17,6 +17,7 @@ import UpdateInfo from '../components/Account/ChangeUserInformation/UpdateInfo';
 import ChangePassword from '../components/Account/ChangePassword/ChangePassword';
 import OrderConfirm from '../components/Order/OrderConfirm/OrderConfirm';
 import ProductDetail from '../components/Home/ProductDetail';
+import SignIn from '../components/Account/Login/SignIn';
 
 const MainStack = createStackNavigator({
   ProductHome: Main,
@@ -59,7 +60,7 @@ const RootStack = createStackNavigator({
 const drawer = createDrawerNavigator({
   RootStack
 },{
-  contentComponent: Menu
+  contentComponent: SignIn
 })
 
 const AppContainer = createAppContainer(drawer);
