@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 
-export class CustomerInfoConfirm extends Component {
+class CustomerInfoConfirm extends Component {
   constructor(props) {
      super(props);
      this.state = {
@@ -32,6 +33,7 @@ export class CustomerInfoConfirm extends Component {
  render() {
      const { inputStyle, bigButton, buttonText } = styles;
      const { name, email, phone, address } = this.state;
+     const { navigate } = this.props.navigation;
      return (
          <View style={{backgroundColor: '#eee', flex: 1, alignItems: 'center'}}>
            <View style={{margin: 20, width: '90%'}}>
@@ -60,11 +62,11 @@ export class CustomerInfoConfirm extends Component {
                    onChangeText={text => this.setState({ address: text })}
                    />
              </View>
-             <TouchableOpacity style={bigButton} onPress={() => this.onContinue()}>
+             <TouchableOpacity style={bigButton} onPress={() => navigate('OrderConfirm')}>
                  <Text style={buttonText}>Continue</Text>
              </TouchableOpacity>
              <View style={{marginTop: 80}}>
-               <TouchableOpacity onPress={() => this.onPress()}>
+               <TouchableOpacity onPress={() => navigate('SignIn')}>
                 <Text style={{color: '#065B7D', textDecorationLine: 'underline', fontSize: 16, fontStyle:'italic'}}>
                   Đăng nhập để đặt hàng
                 </Text>
@@ -74,6 +76,8 @@ export class CustomerInfoConfirm extends Component {
      );
  }
 }
+
+export default withNavigation(CustomerInfoConfirm);
 
 const styles = StyleSheet.create({
  inputStyle: {
@@ -99,5 +103,3 @@ const styles = StyleSheet.create({
      fontWeight: '400',
  }
 });
-
-export default CustomerInfoConfirm

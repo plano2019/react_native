@@ -18,11 +18,15 @@ import ChangePassword from '../components/Account/ChangePassword/ChangePassword'
 import OrderConfirm from '../components/Order/OrderConfirm/OrderConfirm';
 import ProductDetail from '../components/Home/ProductDetail';
 import SignIn from '../components/Account/Login/SignIn';
+import CustomerInfoConfirm from '../components/Account/ChangeUserInformation/CustomerInfoConfirm';
 
 const MainStack = createStackNavigator({
   ProductHome: Main,
   ProductList: ListProduct,
   ProductDetail: ProductDetail,
+  CustomerInfoConfirm: CustomerInfoConfirm,
+  OrderConfirm: OrderConfirm,
+  SignIn: SignIn,
   OrderHistory,
   UpdateInfo,
   ChangePassword,

@@ -3,17 +3,35 @@ import {
     View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, ScrollView
 } from 'react-native';
 import { firebaseApp } from '../../services/FirebaseConfig';
+import { withNavigation } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import mangcut from '../../assets/images/categories/mangcut.jpg';
 import back from '../../assets/images/categories/arrowleft.png'
 
-export default class ProductDetail extends Component {
+class ProductDetail extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            products : []
+            products : [],
+            count: 1
+        }
+    }
+
+    increaseCount(){
+        this.setState({
+            count: this.state.count + 1
+        });
+    }
+
+    decreaseCount(){
+        if(this.state.count == 1) {
+            return;
+        }
+        else {
+            this.setState({
+                count: this.state.count - 1
+            });
         }
     }
 
@@ -39,6 +57,7 @@ export default class ProductDetail extends Component {
         } = styles;
 
         const { products } = this.state;
+        const { navigate } = this.props.navigation;
         
         return (
             <View style={{flex: 1}}>
@@ -67,11 +86,11 @@ export default class ProductDetail extends Component {
                                         <View style={{ flexDirection: 'row', paddingBottom: 5}}>
                                             <Text style={textStyle}>Chọn số lượng:</Text>
                                             <View style={{width: 25}}></View>
-                                            <TouchableOpacity>
+                                            <TouchableOpacity onPress={() => {this.increaseCount()}}>
                                                 <Icon name='ios-add-circle-outline' size={25} color={'#065B7D'}/>
                                             </TouchableOpacity>
-                                            <Text style={txtCount}>1</Text>
-                                            <TouchableOpacity>
+                                            <Text style={txtCount}>{this.state.count}</Text>
+                                            <TouchableOpacity onPress={() => {this.decreaseCount()}}>
                                                 <Icon name='ios-remove-circle-outline' size={25} color={'#065B7D'}/>
                                             </TouchableOpacity>
                                         </View>
@@ -85,7 +104,7 @@ export default class ProductDetail extends Component {
                                             <Text style={{fontSize: 20, color: '#fff'}}>Thêm vào giỏ hàng</Text>
                                         </TouchableOpacity>
                                         <View style={{width:3}}></View>
-                                        <TouchableOpacity style={checkoutBtn}>
+                                        <TouchableOpacity style={checkoutBtn} onPress={() => navigate('CustomerInfoConfirm', {Product : product.title})}>
                                             <Text style={{fontSize: 20, color: '#fff'}}>Mua ngay</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -98,6 +117,8 @@ export default class ProductDetail extends Component {
         );
     }
 }
+
+export default withNavigation(ProductDetail);
 
 const { width } = Dimensions.get('window');
 
